@@ -1,0 +1,15 @@
+{
+	"__default__" :
+	{
+		"partition" : "general-compute",
+		"time" : "00:15:00",
+		"nodes" : 2,
+		"ntasks-per-node" : 8,
+		"mem" :  23000,
+		"job-name" : "testSnakemake",
+		"output" : "testSnakemake.out",
+		"mail-type" : "ALL",
+		"mail-user" : "hasibaas@buffalo.edu"
+	}
+
+}

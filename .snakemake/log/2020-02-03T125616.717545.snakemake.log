@@ -1,0 +1,88 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cluster nodes: 100
+Job counts:
+	count	jobs
+	1	concatenate
+	1	liftOver
+	1	maskingCrms
+	1	masking_negs
+	1	movingMaskedCrms
+	1	movingMaskedNegs
+	1	negative
+	7
+
+[Mon Feb  3 12:56:16 2020]
+rule liftOver:
+    input: testDm6_output.bed, /gpfs/scratch/mshalfon/Training_Set_Construction_Pipeline/new_chain_files/, /gpfs/scratch/mshalfon/Training_Set_Construction_Pipeline/new_fasta_files/, /gpfs/scratch/mshalfon/Training_Set_Construction_Pipeline/
+    output: Dana.testDm6_output.bed.fa, Dere.testDm6_output.bed.fa, Dgri.testDm6_output.bed.fa, Dmoj.testDm6_output.bed.fa, Dper.testDm6_output.bed.fa, Dpse.testDm6_output.bed.fa, Dsec.testDm6_output.bed.fa, Dsim.testDm6_output.bed.fa, Dvir.testDm6_output.bed.fa, Dyak.testDm6_output.bed.fa
+    jobid: 6
+
+Submitted job 6 with external jobid 'Submitted batch job 820925'.
+[Mon Feb  3 12:56:56 2020]
+Finished job 6.
+1 of 7 steps (14%) done
+
+[Mon Feb  3 12:56:56 2020]
+localrule concatenate:
+    input: Dana.testDm6_output.bed.fa, Dere.testDm6_output.bed.fa, Dgri.testDm6_output.bed.fa, Dmoj.testDm6_output.bed.fa, Dper.testDm6_output.bed.fa, Dpse.testDm6_output.bed.fa, Dsec.testDm6_output.bed.fa, Dsim.testDm6_output.bed.fa, Dvir.testDm6_output.bed.fa, Dyak.testDm6_output.bed.fa
+    output: mapping1.test/crms.fa
+    jobid: 5
+
+[Mon Feb  3 12:56:57 2020]
+Finished job 5.
+2 of 7 steps (29%) done
+
+[Mon Feb  3 12:56:57 2020]
+rule maskingCrms:
+    input: mapping1.test/crms.fa
+    output: crms.fa.2.7.7.80.10.50.500.mask
+    jobid: 4
+
+Submitted job 4 with external jobid 'Submitted batch job 820994'.
+
+[Mon Feb  3 12:56:57 2020]
+rule negative:
+    input: mapping1.test/crms.fa, /projects/academic/mshalfon/RandomSameGC_files/finalchr, /projects/academic/mshalfon/RandomSameGC_files/genes.goodchronly
+    output: mapping1.test/neg.fa
+    jobid: 3
+
+Submitted job 3 with external jobid 'Submitted batch job 820996'.
+[Mon Feb  3 12:57:07 2020]
+Finished job 4.
+3 of 7 steps (43%) done
+
+[Mon Feb  3 12:57:07 2020]
+localrule movingMaskedCrms:
+    input: crms.fa.2.7.7.80.10.50.500.mask, mapping1.test/crms.fa
+    output: mapping1.test/crms.fasta
+    jobid: 1
+
+[Mon Feb  3 12:57:07 2020]
+Finished job 1.
+4 of 7 steps (57%) done
+[Mon Feb  3 13:03:27 2020]
+Finished job 3.
+5 of 7 steps (71%) done
+
+[Mon Feb  3 13:03:27 2020]
+rule masking_negs:
+    input: mapping1.test/neg.fa
+    output: neg.fa.2.7.7.80.10.50.500.mask
+    jobid: 2
+
+Submitted job 2 with external jobid 'Submitted batch job 821370'.
+[Mon Feb  3 13:04:57 2020]
+Finished job 2.
+6 of 7 steps (86%) done
+
+[Mon Feb  3 13:04:57 2020]
+localrule movingMaskedNegs:
+    input: neg.fa.2.7.7.80.10.50.500.mask, mapping1.test/neg.fa
+    output: mapping1.test/neg.fasta
+    jobid: 0
+
+[Mon Feb  3 13:04:57 2020]
+Finished job 0.
+7 of 7 steps (100%) done
+Complete log: /gpfs/scratch/mshalfon/Training_Set_Construction_Pipeline/.snakemake/log/2020-02-03T125616.717545.snakemake.log

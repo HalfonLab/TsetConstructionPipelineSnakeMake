@@ -1,0 +1,32 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cluster nodes: 100
+Job counts:
+	count	jobs
+	1	SelectSmallestFeature
+	1	concatenate
+	1	liftOver
+	1	maskingCrms
+	1	masking_negs
+	1	movingMaskedCrms
+	1	movingMaskedNegs
+	1	negative
+	8
+
+[Mon Feb  3 12:47:42 2020]
+localrule SelectSmallestFeature:
+    input: in/testDm6.bed
+    output: testDm6_output.bed
+    jobid: 7
+
+[Mon Feb  3 12:47:42 2020]
+Error in rule SelectSmallestFeature:
+    jobid: 7
+    output: testDm6_output.bed
+    shell:
+        scripts/SelectSmallestFeature.py -i in/testDm6.bed -o testDm6_output.bed
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /gpfs/scratch/mshalfon/Training_Set_Construction_Pipeline/.snakemake/log/2020-02-03T124742.058084.snakemake.log

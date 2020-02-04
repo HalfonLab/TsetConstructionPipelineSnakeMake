@@ -1,0 +1,45 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cluster nodes: 100
+Job counts:
+	count	jobs
+	1	SelectSmallestFeature
+	1	concatenate
+	1	liftOver
+	1	maskingCrms
+	1	masking_negs
+	1	movingMaskedCrms
+	1	movingMaskedNegs
+	1	negative
+	8
+
+[Mon Feb  3 12:48:53 2020]
+localrule SelectSmallestFeature:
+    input: in/testDm6.bed
+    output: testDm6_output.bed
+    jobid: 7
+
+[Mon Feb  3 12:49:08 2020]
+Finished job 7.
+1 of 8 steps (12%) done
+
+[Mon Feb  3 12:49:08 2020]
+rule liftOver:
+    input: testDm6_output.bed, /gpfs/scratch/mshalfon/Training_Set_Construction_Pipeline/new_chain_files/, /gpfs/scratch/mshalfon/Training_Set_Construction_Pipeline/new_fasta_files/, /gpfs/scratch/mshalfon/Training_Set_Construction_Pipeline/
+    output: Dana.testDm6_output.bed.fa, Dere.testDm6_output.bed.fa, Dgri.testDm6_output.bed.fa, Dmoj.testDm6_output.bed.fa, Dper.testDm6_output.bed.fa, Dpse.testDm6_output.bed.fa, Dsec.testDm6_output.bed.fa, Dsim.testDm6_output.bed.fa, Dvir.testDm6_output.bed.fa, Dyak.testDm6_output.bed.fa
+    jobid: 6
+
+Submitted job 6 with external jobid 'Submitted batch job 820595'.
+[Mon Feb  3 12:49:23 2020]
+Error in rule liftOver:
+    jobid: 6
+    output: Dana.testDm6_output.bed.fa, Dere.testDm6_output.bed.fa, Dgri.testDm6_output.bed.fa, Dmoj.testDm6_output.bed.fa, Dper.testDm6_output.bed.fa, Dpse.testDm6_output.bed.fa, Dsec.testDm6_output.bed.fa, Dsim.testDm6_output.bed.fa, Dvir.testDm6_output.bed.fa, Dyak.testDm6_output.bed.fa
+    shell:
+        scripts/liftover_script_modified.sh testDm6_output.bed /gpfs/scratch/mshalfon/Training_Set_Construction_Pipeline/ /gpfs/scratch/mshalfon/Training_Set_Construction_Pipeline/new_chain_files/ /gpfs/scratch/mshalfon/Training_Set_Construction_Pipeline/new_fasta_files/
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 820595
+
+Error executing rule liftOver on cluster (jobid: 6, external: Submitted batch job 820595, jobscript: /gpfs/scratch/mshalfon/Training_Set_Construction_Pipeline/.snakemake/tmp.xfcgwz5p/snakejob.liftOver.6.sh). For error details see the cluster log and the log files of the involved rule(s).
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /gpfs/scratch/mshalfon/Training_Set_Construction_Pipeline/.snakemake/log/2020-02-03T124853.521921.snakemake.log
