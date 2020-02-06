@@ -1,7 +1,11 @@
 localrules: SelectSmallestFeature,concatenate,movingMaskedCrms,movingMaskedNegs
 species=['Dana', 'Dere','Dgri', 'Dmoj', 'Dper', 'Dpse', 'Dsec', 'Dsim', 'Dvir', 'Dyak','Dmel']
-inputFile="testDm6"
-tsetName="mapping1.test"
+
+inputFile=config['tset']
+tsetName=config['tset']
+#inputFile="testDm6"
+#tsetName="mapping1.test"
+
 # rule all:
 # 	input:
 # 		"out/testDm6_15_output.bed"
@@ -36,9 +40,11 @@ rule liftOver:
 		path_to_executable="/TsetConstructionPipelineSnakeMake/"
 	output:
 	   	expand("{specie}.{input}_output.bed.fa", specie=species, input=inputFile)
+	log:
+		expand("logs/liftover/{input}.log",input=inputFile)
 	shell:
 		#"cp out/testDm6_15_output_sorted.bed ."
-		"scripts/liftover_script_modified.sh {input.bed_file} {input.path_to_executable} {input.chain_files_dir} {input.genome_files_dir}"
+		"scripts/liftover_script_modified.sh {input.bed_file} {input.path_to_executable} {input.chain_files_dir} {input.genome_files_dir} 2> {log}"
 
 rule concatenate:
 	input:
@@ -67,8 +73,11 @@ rule negative:
 
 	output:
 		outfileName=expand("{tset}/neg.fa",tset=tsetName)
+
+	log:
+		expand("logs/bkg/{input}.log",input=inputFile)
 	shell:
-		"perl scripts/randomWithSameGC.pl --crm {input.infileName} --output {output.outfileName} --size 10 --genomedir {input.genomedir} --gene {input.gene} --suffix .fa "
+		"perl scripts/randomWithSameGC.pl --crm {input.infileName} --output {output.outfileName} --size 10 --genomedir {input.genomedir} --gene {input.gene} --suffix .fa 2> {log}"
 
 rule maskingCrms:
 	input:
