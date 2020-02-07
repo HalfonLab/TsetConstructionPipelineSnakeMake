@@ -3,8 +3,11 @@ species=['Dana', 'Dere','Dgri', 'Dmoj', 'Dper', 'Dpse', 'Dsec', 'Dsim', 'Dvir', 
 
 inputFile=config['tset']
 tsetName=config['tset']
+fdir='fasta_log_files'+inputFile
+
 #inputFile="testDm6"
 #tsetName="mapping1.test"
+
 
 # rule all:
 # 	input:
@@ -51,13 +54,14 @@ rule concatenate:
 		out=expand("{specie}.{input}_output.bed.fa", specie=species, input=inputFile)
 		#tsetName=expand("{tset}",tset=tsetName)
 	output:	
- 		fileName=expand("{tset}/crms.fa",tset=tsetName)
+ 		fileName=expand("{tset}/crms.fa",tset=tsetName),
+		dir=directory(fdir)
 		#tsetName=expand("{tset}",tset=tsetName)
 	shell:
 		"""
 		cat {input.out} > {output.fileName}
-		mkdir fasta_log_files
-		mv D* fasta_log_files/
+		mkdir {output.dir}
+		mv D* {output.dir}
 		#$tsetName
 		#echo $tsetName
 		#mkdir {tsetName}
