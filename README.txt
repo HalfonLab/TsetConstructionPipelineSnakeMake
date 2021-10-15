@@ -9,7 +9,7 @@ updated: Oct 2021 (edited readme, fixed snakemake)
 #####################################################
 
 
-**Steps to follow**:
+**#Steps to follow**:
 1.	Git clone this folder to your directory on ccr/cluster
 2.	Copy paste following commands to load the required modules
 
