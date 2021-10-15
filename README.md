@@ -2,8 +2,10 @@
 #####################################################
 
 ****** Training set construction pipeline ********
+
 (c) Hasiba Asma
 Date: Jan 2020
+
 updated: Oct 2021 (edited readme, fixed snakemake)
 
 #####################################################
