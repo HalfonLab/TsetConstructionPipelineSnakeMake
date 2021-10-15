@@ -38,9 +38,9 @@ rule SelectSmallestFeature:
 rule liftOver:
 	input:
 		bed_file= expand("{input}_output.bed",input=inputFile),
-		chain_files_dir= "/TsetConstructionPipelineSnakeMake/new_chain_files/",
-		genome_files_dir="/TsetConstructionPipelineSnakeMake/new_fasta_files/",
-		path_to_executable="/TsetConstructionPipelineSnakeMake/"
+		chain_files_dir= "new_chain_files/",
+		genome_files_dir="new_fasta_files/",
+		path_to_executable="."
 	output:
 	   	expand("{specie}.{input}_output.bed.fa", specie=species, input=inputFile)
 	log:
