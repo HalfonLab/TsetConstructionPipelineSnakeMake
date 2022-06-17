@@ -9,6 +9,9 @@ Date: Jan 2020
 
 updated: Oct 2021 (edited readme, fixed snakemake file)
 
+This pipeline follows all the steps mentioned in 3.2 section of protocol (Kazemian & Halfon 2019). 
+A bed file of known CRMs from melanogaster as input is needed, and then pipeline grabs its orthologs (using liftover) from other species, repeats masked, also generate negative set, and returns us the final fasta files of positive (CRMs) and negatives (background sequences) to be used with SCRMshaw. 
+
 #####################################################
 
 
