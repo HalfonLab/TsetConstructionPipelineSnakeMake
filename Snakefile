@@ -5,35 +5,14 @@ inputFile=config['tset']
 tsetName=config['tset']
 fdir='fasta_log_files'+inputFile
 
-#inputFile="testDm6"
-#tsetName="mapping1.test"
-
-
-# rule all:
-# 	input:
-# 		"out/testDm6_15_output.bed"
-# 		"out/testDm6_15_output_sorted.bed"
-		# "out/testDm6_15_output.bed"
-		# "out/testDm6_15_output_sorted.bed"
 
 rule SelectSmallestFeature:
 	input:
 		expand("in/{input}.bed",input=inputFile)
 	output:
 		expand("{input}_output.bed",input=inputFile)
-	conda:
-		"envs/mapping.yml"
 	shell:
 		"scripts/SelectSmallestFeature.py -i {input} -o {output}"
-# rule sort:
-# 	input:
-# 		expand("out/{input}_output.bed",input=inputFile)
-# 	output:
-# 		expand("{input}_output_sorted.bed",input=inputFile)
-# 	conda:
-# 		"envs/mapping.yml"
-# 	shell:
-# 		"bedtools sort -i {input} > {output}"
 
 rule liftOver:
 	input:
@@ -46,26 +25,19 @@ rule liftOver:
 	log:
 		expand("logs/liftover/{input}.log",input=inputFile)
 	shell:
-		#"cp out/testDm6_15_output_sorted.bed ."
 		"scripts/liftover_script_modified.sh {input.bed_file} {input.path_to_executable} {input.chain_files_dir} {input.genome_files_dir} 2> {log}"
 
 rule concatenate:
 	input:
 		out=expand("{specie}.{input}_output.bed.fa", specie=species, input=inputFile)
-		#tsetName=expand("{tset}",tset=tsetName)
 	output:	
  		fileName=expand("{tset}/crms.fa",tset=tsetName),
 		dir=directory(fdir)
-		#tsetName=expand("{tset}",tset=tsetName)
 	shell:
 		"""
 		cat {input.out} > {output.fileName}
 		mkdir {output.dir}
 		mv D* {output.dir}
-		#$tsetName
-		#echo $tsetName
-		#mkdir {tsetName}
-		#mv {output.fileName} {tsetName}
 
 		"""
 
@@ -88,7 +60,6 @@ rule maskingCrms:
 		inCrms=expand("{tset}/crms.fa",tset=tsetName)
 
 	output:
-		#outCrms=expand("{tset}/crms.fasta",tset=tsetName)
 		outCrms="crms.fa.2.7.7.80.10.50.500.mask"
 	shell:
 		"scripts/trf409.linux64 {input.inCrms} 2 7 7 80 10 50 500 -m -h || true"
