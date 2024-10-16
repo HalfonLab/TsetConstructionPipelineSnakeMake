@@ -5,6 +5,8 @@
 # Input: Sorted bed3+1 file (no header) : bedtools sorted -i [input.bed] > input.sorted.bed
 # To run: python SelectSmallestFeature.py -i [input.sorted.bed] -d [desired basepair overlap allowed] > clustered.sort.bed
 
+#update 10-16-2024 to replace deprecated 'set_value' syntax (thanks Microsoft Co-Pilot!)
+
 import pandas as pd
 import sys
 import argparse
@@ -33,12 +35,12 @@ def generate_new_cluster(df):
             cluster_index = cluster_index + 1
             end = row.stop
             chrom = row.chrom
-            df.set_value(index,"cluster",cluster_index)
+            df.at[index, "cluster"] = cluster_index
         else:
             if (row.stop > end):
                 end = row.stop
                 chrom = row.chrom
-        df.set_value(index, "cluster", cluster_index)
+        df.at[index, "cluster"] = cluster_index
 
     return df # return the reclustered dataframe for further processing
 
@@ -48,7 +50,7 @@ def processGroup(df):
 
     #Case 1: If more than one cluster exists in this dataFrame, iterate through the clusters and process again
     if newDF['cluster'].nunique() > 1:
-        #iterate through each group's new DF seperately and reduce
+        #iterate through each group's new DF separately and reduce
         tempDF = newDF.groupby(['cluster'])
         for index, group in tempDF:
             processGroup(tempDF.get_group(index))
