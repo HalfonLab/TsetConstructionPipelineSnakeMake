@@ -19,7 +19,7 @@ rule liftOver:
 		bed_file= expand("{input}_output.bed",input=inputFile),
 		chain_files_dir= "/projects/academic/mshalfon/dm6-DrosSpecies_chain_files/",
 		genome_files_dir="/projects/academic/mshalfon/drosSpecies_fasta_files/",
-		path_to_executable="/projects/academic/mshalfon/liftOver"
+		path_to_executable="/projects/academic/mshalfon/liftOver/"
 	output:
 	   	expand("{specie}.{input}_output.bed.fa", specie=species, input=inputFile)
 	log:
