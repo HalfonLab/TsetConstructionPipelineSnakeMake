@@ -12,14 +12,14 @@ rule SelectSmallestFeature:
 	output:
 		expand("{input}_output.bed",input=inputFile)
 	shell:
-		"scripts/SelectSmallestFeature.py -i {input} -o {output}"
+		"/projects/academic/mshalfon/Scripts/SelectSmallestFeature.py -i {input} -o {output}"
 
 rule liftOver:
 	input:
 		bed_file= expand("{input}_output.bed",input=inputFile),
-		chain_files_dir= "new_chain_files/",
-		genome_files_dir="new_fasta_files/",
-		path_to_executable="."
+		chain_files_dir= "/projects/academic/mshalfon/dm6-DrosSpecies_chain_files/",
+		genome_files_dir="/projects/academic/mshalfon/drosSpecies_fasta_files/",
+		path_to_executable="/projects/academic/mshalfon/liftOver"
 	output:
 	   	expand("{specie}.{input}_output.bed.fa", specie=species, input=inputFile)
 	log:
@@ -62,7 +62,7 @@ rule maskingCrms:
 	output:
 		outCrms="crms.fa.2.7.7.80.10.50.500.mask"
 	shell:
-		"scripts/trf409.linux64 {input.inCrms} 2 7 7 80 10 50 500 -m -h || true"
+		"/projects/academic/mshalfon/Scripts/trf409.linux64 {input.inCrms} 2 7 7 80 10 50 500 -m -h || true"
 
 rule movingMaskedCrms:
 	input:
@@ -83,7 +83,7 @@ rule masking_negs:
 	output:
 		outNegs="neg.fa.2.7.7.80.10.50.500.mask"
 	shell:
-		"scripts/trf409.linux64 {input.inNegs} 2 7 7 80 10 50 500 -m -h || true"
+		"/projects/academic/mshalfon/Scripts/trf409.linux64 {input.inNegs} 2 7 7 80 10 50 500 -m -h || true"
 
 rule movingMaskedNegs:
 	input:
