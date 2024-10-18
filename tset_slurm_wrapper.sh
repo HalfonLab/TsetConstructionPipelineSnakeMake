@@ -34,8 +34,8 @@ for file in "$directory"/*; do
 	# Check if it's a file (not a directory)
   	if [ -f "$file" ]; then
     	# Print the basename of the file
-    	tsetName=$(basename "$file")
-     	#might want to change to $(basename "$file" .bed) to remove suffix
+    	#tsetName=$(basename "$file")
+     	tsetName=$(basename "$file" .bed)
   	fi
 
 
