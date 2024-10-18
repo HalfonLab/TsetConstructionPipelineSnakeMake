@@ -8,7 +8,7 @@ fdir='fasta_log_files'+inputFile
 
 rule SelectSmallestFeature:
 	input:
-		expand("in/{input}",input=inputFile)
+		expand("in/{input}.bed",input=inputFile)
 	output:
 		expand("{input}_output.bed",input=inputFile)
 	shell:
