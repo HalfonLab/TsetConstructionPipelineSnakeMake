@@ -35,6 +35,7 @@ for file in "$directory"/*; do
   	if [ -f "$file" ]; then
     	# Print the basename of the file
     	tsetName=$(basename "$file")
+     	#might want to change to $(basename "$file" .bed) to remove suffix
   	fi
 
 
@@ -43,7 +44,7 @@ for file in "$directory"/*; do
 
 	echo "Done snakemake for another set"
 	echo "cleaning intermediate files"
-	./clean.sh
+	./clean.sh $tsetName
 
 	echo "DONE 1 more"
 
